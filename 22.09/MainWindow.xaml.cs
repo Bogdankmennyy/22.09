@@ -1,28 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.InteropServices;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Windows.Interop;
 
-namespace _22._09
+namespace WindowsApiMessageBox
 {
-    /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
         }
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        public static extern MessageBoxResult MessageBox(IntPtr hWnd, string text, string caption, uint type);
+
+        private void ShowHelloWorldMessageBox_Click(object sender, RoutedEventArgs e)
+        {
+            IntPtr mainWindowHandle = new WindowInteropHelper(this).Handle;
+            MessageBox(mainWindowHandle, "Hello, World!", "MessageBox з Windows API", 0x00000040 /* MB_ICONINFORMATION */);
+        }
     }
 }
+
