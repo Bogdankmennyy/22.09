@@ -71,7 +71,7 @@ namespace NumberGuessingGame
         private void EnableUserInput(bool enable)
         {
             userGuessTextBox.IsEnabled = enable;
-            SubmitGuessButton.IsEnabled = enable;
+           // SubmitGuessButton.IsEnabled = enable;
         }
     }
 }
